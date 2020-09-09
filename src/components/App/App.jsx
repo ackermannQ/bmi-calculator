@@ -16,23 +16,23 @@ const App = () => {
     storeData('data', state);
     const date = state.map(obj => obj.date);
     const bmi = state.map(obj => obj.bmi);
-    let newData = { date, bmi };
+    const newData = { date, bmi };
     setData(newData);
   }, [state]);
 
   const handleChange = val => {
-    let heightInM = val.height / 100;
+    const heightInM = val.height / 100;
     val.bmi = (val.weight / (heightInM * heightInM)).toFixed(2);
     val.id = uuidv4();
-    let newVal = [...state, val];
-    let len = newVal.length;
+    const newVal = [...state, val];
+    const len = newVal.length;
     if (len > 7) newVal = newVal.slice(1, len);
     setState(newVal);
   };
 
   const handleDelete = id => {
     storeData('lastState', state);
-    let newState = state.filter(i => {
+    const newState = state.filter(i => {
       return i.id !== id;
     });
     setState(newState);
@@ -49,24 +49,24 @@ const App = () => {
       </div>
       <div className='row'>
         <div className='col m12 s12'>
-          <BmiForm change={handleChange} />
-          <Bar labelData={data.date} bmiData={data.bmi} />
+          <BmiForm change={ handleChange } />
+          <Bar labelData={ data.date } bmiData={ data.bmi } />
           <div>
             <div className='row center'>
               <h4 className='white-text'>7 Day Data</h4>
             </div>
             <div className='data-container row'>
-              {state.length > 0 ? (
+              { state.length > 0 ? (
                 <>
-                  {state.map(info => (
+                  { state.map(info => (
                     <Info
-                      key={info.id}
-                      id={info.id}
-                      weight={info.weight}
-                      height={info.height}
-                      date={info.date}
-                      bmi={info.bmi}
-                      deleteCard={handleDelete}
+                      key={ info.id }
+                      id={ info.id }
+                      weight={ info.weight }
+                      height={ info.height }
+                      date={ info.date }
+                      bmi={ info.bmi }
+                      deleteCard={ handleDelete }
                     />
                   ))}
                 </>
@@ -77,7 +77,7 @@ const App = () => {
           </div>
           {getData('lastState') !== null ? (
             <div className='center'>
-              <button className='calculate-btn' onClick={handleUndo}>
+              <button className='calculate-btn' onClick={ handleUndo }>
                 Undo
               </button>
             </div>
