@@ -7,6 +7,10 @@ import Info from '../Info/Info';
 import Bar from '../Bar/Bar';
 import { getData, storeData } from '../../helpers/localStorage';
 
+
+const numberTotalOfValuesStored = 7
+// Implement of test to avoid multiple BMI value per day 
+
 const App = () => {
   const initialState = () => getData('data') || [];
   const [state, setState] = useState(initialState);
@@ -20,13 +24,13 @@ const App = () => {
     setData(newData);
   }, [state]);
 
-  const handleChange = val => {
+  const handleChange = val => { 
     const heightInM = val.height / 100;
     val.bmi = (val.weight / (heightInM * heightInM)).toFixed(2);
     val.id = uuidv4();
-    const newVal = [...state, val];
+    let newVal = [...state, val];
     const len = newVal.length;
-    if (len > 7) newVal = newVal.slice(1, len);
+    if (len > numberTotalOfValuesStored) newVal = newVal.slice(1, len);
     setState(newVal);
   };
 
