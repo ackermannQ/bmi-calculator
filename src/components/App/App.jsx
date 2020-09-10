@@ -9,12 +9,11 @@ import { getData, storeData } from '../../helpers/localStorage';
 
 
 const numberTotalOfValuesStored = 7
-// Implement of test to avoid multiple BMI value per day 
 
 const App = () => {
   const initialState = () => getData('data') || [];
   const [state, setState] = useState(initialState);
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ });
 
   useEffect(() => {
     storeData('data', state);

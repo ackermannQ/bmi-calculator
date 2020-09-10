@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../App/App.css';
 
+const maxValueAcceptable = 250
+
 const initialValues = {
 	weight: '',
 	height: '',
-	date: ''
+	date: '',
+	todayDate: ''
 }
 
 const BmiForm = ({ change }) => {
@@ -13,14 +16,16 @@ const BmiForm = ({ change }) => {
 
 	const handleChange = e => {
 		let { value, name } = e.target;
-		if (value > 999) {
-			value = 999;
+		if (value > maxValueAcceptable) {
+			value = maxValueAcceptable;
 		}
+		const today = new Date().getDate()
 		const date = new Date().toLocaleString().split(',')[0];
 		setState({
 			...state,
 			[name]: value,
-			date
+			date,
+			today
 		});
 	};
 
@@ -39,10 +44,10 @@ const BmiForm = ({ change }) => {
 						name="weight"
 						type="number"
 						min="1"
-						max="999"
+						max="maxValueAcceptable.toString()"
 						placeholder="50"
-						value={state.weight}
-						onChange={handleChange}
+						value={ state.weight }
+						onChange={ handleChange }
 					/>
 				</div>
 
@@ -53,10 +58,10 @@ const BmiForm = ({ change }) => {
 						name="height"
 						type="number"
 						min="1"
-						max="999"
+						max="maxValueAcceptable"
 						placeholder="176"
-						value={state.height}
-						onChange={handleChange}
+						value={ state.height }
+						onChange={ handleChange }
 					/>
 				</div>
 			</div>
@@ -66,7 +71,7 @@ const BmiForm = ({ change }) => {
 					className="calculate-btn"
 					type="button"
 					disabled={state.weight === '' || state.height === ''}
-					onClick={handleSubmit}
+					onClick={ handleSubmit }
 				>
 					Calculate BMI
 				</button>

@@ -14,12 +14,12 @@ const Info = ({ weight, height, id, date, bmi, deleteCard }) => {
             BMI: {bmi}
           </span>
           <div className="card-data">
-            <span data-test="weight">Weight: {weight} kg</span>
-            <span data-test="height">Height: {height} cm</span>
-            <span data-test="date">Date: {date}</span>
+            <span data-test="weight">Weight: { weight } kg</span>
+            <span data-test="height">Height: { height } cm</span>
+            <span data-test="date">Date: { date }</span>
           </div>
 
-          <button className="delete-btn" onClick={handleDelete}>
+          <button className="delete-btn" onClick={ handleDelete }>
             X
           </button>
         </div>
